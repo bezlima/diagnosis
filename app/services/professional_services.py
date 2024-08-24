@@ -33,32 +33,24 @@ def delete_professional(db: Session, professional_id: int):
 
 def update_professional(db: Session, professionals_id: int, update_infos: professional_schema.UpdateProfessional):
     professional = db.query(professional_model.Professional).filter(professional_model.Professional.professionals_id == professionals_id).first()
-
     if professional:
         update_data = update_infos.model_dump(exclude_unset=True)
-
         if 'new_password' in update_data:
             update_data['hashed_password'] = encrypt_password(update_data.pop('new_password'))
-
         for key, value in update_data.items():
             setattr(professional, key, value)
-
         db.commit()
         db.refresh(professional)
         return professional
-
     return None
 
 def create_professional(db: Session, professional: professional_schema.ProfessionalCreate):
     hashed_password = encrypt_password(professional.password)
-
     professional = professional_model(
         email=professional.email, 
         hashed_password=hashed_password
     )
-
     db.add(professional)
     db.connection()
     db.refresh(professional)
-
     return professional
