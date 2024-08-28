@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 
-class RoleBase(BaseModel):
+class ReportBase(BaseModel):
     professional_id: int
     client_id: int
     title: str
     content: str
 
-class Role(RoleBase):
+class Report(ReportBase):
     report_id: int
 
     class Config:
