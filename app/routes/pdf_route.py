@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Response
 from ..utils.pdf_generator import pdf_template
 
-pdf_router = APIRouter()
+pdf_router = APIRouter(tags=["PDF Generator"])
+
+#rotas deve receber professional id para verificar se tem permissão para x
 
 @pdf_router.get('/pdf/{report_id}')
 def generate_pdf(report_id: str):
