@@ -18,7 +18,7 @@ def get_report_by_id(db: Session, report_id: int):
     report = db.query(report_models.Report).filter(report_models.Report.report_id == report_id).first()
     return report
 
-def update_report(db: Session, report_id: int, update_infos: report_schema.RoleBase):
+def update_report(db: Session, report_id: int, update_infos: report_schema.ReportBase):
     report = db.query(report_models.Report).filter(report_models.Report.report_id == report_id).first()
     if report:
         update_data = update_infos.model_dump(exclude_unset=True)
@@ -37,9 +37,9 @@ def delete_report(db: Session, report_id: int):
         return True
     return
 
-def create_report(db: Session, report: report_schema.RoleBase):
+def create_report(db: Session, report: report_schema.ReportBase):
     db.add(report)
-    db.connection()
-    db.refresh()
+    db.commit()
+    db.refresh(report)
     return report
 
