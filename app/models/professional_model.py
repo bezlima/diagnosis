@@ -14,5 +14,5 @@ class Professional(Base):
     professional_document = Column(String, unique=True, index=True)
     address = Column(String)
     role_id = Column(Integer, ForeignKey('roles.role_id'))
-    role = relationship("Roles") 
+    role = relationship("Role") 
     hashed_password = Column(String)

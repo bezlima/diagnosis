@@ -46,11 +46,18 @@ def update_professional(db: Session, professionals_id: int, update_infos: profes
 
 def create_professional(db: Session, professional: professional_schema.ProfessionalCreate):
     hashed_password = encrypt_password(professional.password)
-    professional = professional_model(
-        email=professional.email, 
-        hashed_password=hashed_password
+    professional = professional_model.Professional(
+        name = professional.name,
+        email = professional.email, 
+        professional_document_RG = professional.professional_document_RG,
+        professional_document_CPF = professional.professional_document_CPF,
+        professional_document_type = professional.professional_document_type,
+        professional_document = professional.professional_document,
+        address = professional.address,
+        role_id = professional.role_id,
+        hashed_password = hashed_password
     )
     db.add(professional)
-    db.connection()
+    db.commit()
     db.refresh(professional)
     return professional
