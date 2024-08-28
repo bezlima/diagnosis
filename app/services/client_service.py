@@ -7,41 +7,41 @@ def get_all_clients(db: Session, skip: int = 0, limit: int = 100):
     return clients
 
 def get_clients_by_professional_id(db: Session, professional_id: int, skip: int = 0, limit: int = 100):
-    clients = db.query(client_model.Client).filter(client_model.professional_id == professional_id).offset(skip).limit(limit).all()
+    clients = db.query(client_model.Client).filter(client_model.Client.professional_id == professional_id).offset(skip).limit(limit).all()
     return clients
 
 def get_clients_by_name(db: Session, client_name: str, professional_id: int, skip: int = 0, limit: int = 100):
-    clients = db.query(client_model.Client).filter(client_model.name == client_name).offset(skip).limit(limit).all()
+    clients = db.query(client_model.Client).filter(client_model.Client.name == client_name).offset(skip).limit(limit).all()
 
     if professional_id:
-        clients_with_professional = db.query(client_model.Client).filter(client_model.name == client_name, client_model.professional_id == professional_id).offset(skip).limit(limit).all()
+        clients_with_professional = db.query(client_model.Client).filter(client_model.Client.name == client_name, client_model.professional_id == professional_id).offset(skip).limit(limit).all()
         return clients_with_professional
     
     return clients
 
 def get_client_by_email(db: Session, client_email: str, professional_id: int):
-    client = db.query(client_model.Client).filter(client_model.email == client_email).first()
+    client = db.query(client_model.Client).filter(client_model.Client.email == client_email).first()
 
     if professional_id:
-        client_with_professional = db.query(client_model.Client).filter(client_model.email == client_email, client_model.professional_id == professional_id).first()
+        client_with_professional = db.query(client_model.Client).filter(client_model.Client.email == client_email, client_model.professional_id == professional_id).first()
         return client_with_professional
     
     return client
 
 def get_client_by_id(db: Session, client_id: int):
-    client = db.query(client_model.Client).filter(client_model.client_id == client_id).first()
+    client = db.query(client_model.Client).filter(client_model.Client.client_id == client_id).first()
     return client
 
 def get_client_by_CPF(db: Session, client_document_CPF: str):
-    client = db.query(client_model.Client).filter(client_model.client_document_CPF == client_document_CPF).first()
+    client = db.query(client_model.Client).filter(client_model.Client.client_document_CPF == client_document_CPF).first()
     return client
 
 def get_client_by_RG(db: Session, client_document_RG: str):
-    client = db.query(client_model.Client).filter(client_model.client_document_RG == client_document_RG).first()
+    client = db.query(client_model.Client).filter(client_model.Client.client_document_RG == client_document_RG).first()
     return client
 
 def update_client(db: Session, client_id: int, update_infos: client_schema.UpdateClient):
-    client = db.query(client_model.Client).filter(client_model.client_id == client_id).first()
+    client = db.query(client_model.Client).filter(client_model.Client.client_id == client_id).first()
     if client:
         update_data = update_infos.model_dump(exclude_unset=True)
         for key, value in update_data.items():
@@ -52,7 +52,7 @@ def update_client(db: Session, client_id: int, update_infos: client_schema.Updat
     return None
 
 def delete_client(db: Session, client_id: int):
-    client = db.query(client_model.Client).filter(client_model.client_id == client_id).first()
+    client = db.query(client_model.Client).filter(client_model.Client.client_id == client_id).first()
     if client:
         db.delete(client)
         db.commit()
@@ -60,7 +60,7 @@ def delete_client(db: Session, client_id: int):
     return False
 
 def create_client(db: Session, client: client_schema.ClientCreate):
-    client = client_model(
+    client = client_model.Client(
         email = client.email,
         address = client.address,
         name = client.name,
@@ -70,6 +70,6 @@ def create_client(db: Session, client: client_schema.ClientCreate):
         professional_id = client.professional_id,
     )
     db.add(client)
-    db.connection()
+    db.commit()
     db.refresh(client)
     return(client)
