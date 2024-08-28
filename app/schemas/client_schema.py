@@ -7,7 +7,7 @@ class ClientBase(BaseModel):
     age : int
     client_document_RG: str
     client_document_CPF: str
-    professionals_id : int
+    professional_id : int
 
 class ClientCreate(ClientBase):
     email : str
@@ -16,7 +16,7 @@ class ClientCreate(ClientBase):
     age : int
     client_document_RG: str
     client_document_CPF: str
-    professionals_id : int
+    professional_id : int
 
 
 class UpdateClient(BaseModel):
@@ -26,7 +26,7 @@ class UpdateClient(BaseModel):
     age : int
     client_document_RG: str
     client_document_CPF: str
-    professionals_id : int
+    professional_id : int
 
 class Client(ClientBase):
     client_id: int
