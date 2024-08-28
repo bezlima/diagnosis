@@ -1,4 +1,3 @@
-import click
 from .start_admin_role import start_admin_role
 from .start_database import start_db
 from .start_professional import start_professional
@@ -7,9 +6,7 @@ from .start_client import start_client
 from .start_report import start_report
 
 def testing_diagnosis():
-    """Initialize Disgnosis testing"""
-
-    click.echo(" Iniciando modelo de teste ... ")
+    """Initialize Diagnosis testing"""
 
     start_db()
 
@@ -19,6 +16,6 @@ def testing_diagnosis():
 
     start_client()
 
-    # start_report()
+    start_report()
 
     start_server()
