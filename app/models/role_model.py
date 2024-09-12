@@ -8,6 +8,7 @@ class Role(Base):
     role_name = Column(String, index=True)
 
     create_role = Column(Boolean)
+    get_your_role = Column(Boolean)
     edit_role = Column(Boolean)
     delete_role = Column(Boolean)
     get_all_roles = Column(Boolean)
@@ -18,11 +19,15 @@ class Role(Base):
     delete_all_professional = Column(Boolean)
 
     create_report = Column(Boolean)
+    get_your_report = Column(Boolean)
     get_all_reports = Column(Boolean)
     edit_all_reports= Column(Boolean)
     delete_all_reports= Column(Boolean)
 
     create_clients = Column(Boolean)
+    get_your_client = Column(Boolean)
     get_all_clients = Column(Boolean)
-    edit_all_client = Column(Boolean)
+    edit_all_clients = Column(Boolean)
     delete_all_client = Column(Boolean)
+
+    create_pdf = Column(Boolean)

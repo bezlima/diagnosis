@@ -19,7 +19,7 @@ def get_role_by_id(db: Session, role_id: int):
     return role
 
 def update_role(db: Session, role_id: int, update_infos: role_schema.RoleBase):
-    role = db.query(role_model.Role).filter(role_model.Role.role_id == role_id)
+    role = db.query(role_model.Role).filter(role_model.Role.role_id == role_id).first()
     if role:
         update_data = update_infos.model_dump(exclude_unset=True)
         for key, value in update_data.items():
@@ -30,14 +30,14 @@ def update_role(db: Session, role_id: int, update_infos: role_schema.RoleBase):
     return False
 
 def delete_role(db: Session, role_id: int):
-    role = db.query(role_model.Role).filter(role_model.Role.role_id == role_id)
+    role = db.query(role_model.Role).filter(role_model.Role.role_id == role_id).first()
     if role:
         db.delete(role)
         db.commit()
         return True
     return False
 
-def create_role(db: Session, role: role_schema.RoleBase):
+def create_role(db: Session, role: role_model.Role):
     db.add(role)
     db.commit()
     db.refresh(role)
