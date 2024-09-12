@@ -55,7 +55,7 @@ python cli.py get-apikeys -
 [] verificar dicionario em serviços, escolher se coloca model_dump() no serviço ou na rota
 
 [] criar regras de negocio nas rotas
-    [] client
+    [x] client
     [] login
     [x] pdf
     [] professional
@@ -70,8 +70,12 @@ python cli.py get-apikeys -
     [] report
     [] role
 
+[x] alterar role entitie
+
 [] modificar o schema para teste em swagger
 
 [] criar requirements.txt > pip freze
 
 [] refatorar e organizar imports se necessário 
+
+[] adicionar refresh token
