@@ -4,26 +4,31 @@ from sqlalchemy.exc import SQLAlchemyError
 from ..db.db_connect import get_db
 from ..schemas import role_schema
 from ..models import role_model
-from ..services import role_services
+from ..services import role_services, professional_services
 from typing import Optional
+from ..auth.dependencie.auth_dependencie import get_current_user
+from ..utils.verify_permission import verify_permission
 import logging
 
 logger = logging.getLogger(__name__)
 
 role_router = APIRouter(tags=["Roles"], prefix='/role')
 
-#rotas deve receber professional id para verificar se tem permissão para x
-#adicionar http status_code=200 nas rotas
-
-@role_router.post('/')
-def create_role(role: role_schema.RoleBase, db: Session = Depends(get_db)):
+@role_router.post('/', status_code=201)
+def create_role(role: role_schema.RoleBase, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     try :
+        current_professional = current_user
+        permission = verify_permission(current_professional, db)
         has_role = role_services.get_role_by_name(db, role.role_name)
+        role_data = role_model.Role(**role.model_dump())
+        new_role = role_services.create_role(db, role_data)
+
+        if not permission.create_role:
+            raise HTTPException(status_code=401, detail="Unauthorized professional")
+
         if has_role:
             raise HTTPException(status_code=400, detail='Role already exists')
         
-        role_data = role_model.Role(**role.model_dump())
-        new_role = role_services.create_role(db, role_data)
         return new_role
     
     except HTTPException as e:
@@ -44,10 +49,16 @@ def create_role(role: role_schema.RoleBase, db: Session = Depends(get_db)):
             detail="An unexpected error occurred"
         ) from e
 
-@role_router.get('/')
-def get_roles(db: Session = Depends(get_db), list_permission: Optional[bool] = Query(False)):
+@role_router.get('/', status_code=200)
+def get_roles(db: Session = Depends(get_db), list_permission: Optional[bool] = Query(False), current_user: dict = Depends(get_current_user)):
     try:
+        current_professional = current_user
+        permission = verify_permission(current_professional, db)
         roles = role_services.get_roles(db)
+
+        if not permission.get_all_roles:
+            raise HTTPException(status_code=401, detail="Unauthorized professional")
+        
         if list_permission:
             return roles
         else:
@@ -71,10 +82,20 @@ def get_roles(db: Session = Depends(get_db), list_permission: Optional[bool] = Q
             detail="An unexpected error occurred"
         ) from e
 
-@role_router.get('/{role_id}')
-def get_role_by_id(role_id: int, db: Session = Depends(get_db)):
+@role_router.get('/{role_id}', status_code=200)
+def get_role_by_id(role_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     try:
+        current_professional = current_user
+        permission = verify_permission(current_professional, db)
+        professional = professional_services.get_professional_by_id(db, current_professional.professional_id)
         role = role_services.get_role_by_id(db, role_id)
+
+        if not permission.get_all_roles:
+            if not permission.get_your_role:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+            elif not professional.role_id == role_id:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+        
         return role
 
     except HTTPException as e:
@@ -95,12 +116,23 @@ def get_role_by_id(role_id: int, db: Session = Depends(get_db)):
             detail="An unexpected error occurred"
         ) from e
 
-# mudar para fazer o dicioario fora so serviço ou mudar todos para dentro do serviço #
-@role_router.put('/{role_id}')
-def update_role(role_id: int, update_infos: role_schema.RoleBase, db: Session = Depends(get_db)):
+@role_router.put('/{role_id}', status_code=202)
+def update_role(role_id: int, update_infos: role_schema.RoleBase, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     try:
-
+        current_professional = current_user
+        permission = verify_permission(current_professional, db)
+        professional = professional_services.get_professional_by_id(db, current_professional.professional_id)
         has_role = role_services.get_role_by_name(db, update_infos.role_name)
+
+        if not permission.get_all_roles:
+            if not permission.get_your_role:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+            elif not professional.role_id == role_id:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+
+        if not permission.edit_report:
+            raise HTTPException(status_code=401, detail="Unauthorized professional")
+        
         if has_role:
             raise HTTPException(status_code=400, detail='Role already exists')
         
@@ -125,10 +157,22 @@ def update_role(role_id: int, update_infos: role_schema.RoleBase, db: Session = 
             detail="An unexpected error occurred"
         ) from e
 
-@role_router.delete('/{role_id}')
-def delete_role(role_id: int, db: Session = Depends(get_db)):
+@role_router.delete('/{role_id}', status_code=204)
+def delete_role(role_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     try:
+        current_professional = current_user
+        permission = verify_permission(current_professional, db)
+        professional = professional_services.get_professional_by_id(db, current_professional.professional_id)
         delete_roles = role_services.delete_role(db, role_id,)
+
+        if not permission.get_all_roles:
+            if not permission.get_your_role:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+            elif not professional.role_id == role_id:
+                raise HTTPException(status_code=401, detail="Unauthorized professional")
+
+        if not permission.delete_report:
+            raise HTTPException(status_code=401, detail="Unauthorized professional")
 
         if delete_roles:
             return 

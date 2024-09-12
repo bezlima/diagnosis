@@ -54,21 +54,21 @@ python cli.py get-apikeys -
 
 [] verificar dicionario em serviços, escolher se coloca model_dump() no serviço ou na rota
 
-[] criar regras de negocio nas rotas
+[x] criar regras de negocio nas rotas
     [x] client
     [x] login
     [x] pdf
     [x] professional
     [x] report
-    [] role
+    [x] role
 
-[] verificar resposta de rota
+[x] verificar resposta de rota
     [x] client
     [x] login
     [x] pdf
     [x] professional
     [x] report
-    [] role
+    [x] role
 
 [x] alterar role entitie
 
