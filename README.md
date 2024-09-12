@@ -59,7 +59,7 @@ python cli.py get-apikeys -
     [x] login
     [x] pdf
     [x] professional
-    [] report
+    [x] report
     [] role
 
 [] verificar resposta de rota
@@ -67,7 +67,7 @@ python cli.py get-apikeys -
     [x] login
     [x] pdf
     [x] professional
-    [] report
+    [x] report
     [] role
 
 [x] alterar role entitie
