@@ -6,8 +6,8 @@ class Professional(Base):
     __tablename__ = "professionals"
 
     professional_id = Column(Integer, primary_key=True)
-    name = Column(String)
     email = Column(String, unique=True, index=True)
+    name = Column(String)
     professional_document_RG = Column(String)
     professional_document_CPF = Column(String)
     professional_document_type = Column(String)

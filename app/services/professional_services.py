@@ -8,23 +8,23 @@ def get_professionals(db: Session, skip: int = 0, limit: int = 100):
     return professional
 
 def get_professional(db: Session, professional_id: int):
-    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professionals_id == professional_id).first()
+    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professional_id == professional_id).first()
     return professional
 
 def get_professional_by_email(db: Session, email: str):
     professional = db.query(professional_model.Professional).filter(professional_model.Professional.email == email).first()
     return professional
 
-def get_rofessional_by_id(db: Session, professional_id: str):
+def get_professional_by_id(db: Session, professional_id: str):
     professional = db.query(professional_model.Professional).filter(professional_model.Professional.professional_id == professional_id).first()
     return professional
 
-def get_rofessional_by_documentid(db: Session, professional_document: str):
+def get_professional_by_documentid(db: Session, professional_document: str):
     professional = db.query(professional_model.Professional).filter(professional_model.Professional.professional_document == professional_document).first()
     return professional
 
 def delete_professional(db: Session, professional_id: int):
-    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professionals_id == professional_id).first()
+    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professional_id == professional_id).first()
     if professional:
         db.delete(professional)
         db.commit()
@@ -32,7 +32,7 @@ def delete_professional(db: Session, professional_id: int):
     return False
 
 def update_professional(db: Session, professionals_id: int, update_infos: professional_schema.UpdateProfessional):
-    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professionals_id == professionals_id).first()
+    professional = db.query(professional_model.Professional).filter(professional_model.Professional.professional_id == professionals_id).first()
     if professional:
         update_data = update_infos.model_dump(exclude_unset=True)
         if 'new_password' in update_data:
