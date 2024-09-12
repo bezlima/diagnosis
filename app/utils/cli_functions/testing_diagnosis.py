@@ -4,6 +4,7 @@ from .start_professional import start_professional
 from .start_server import start_server
 from .start_client import start_client
 from .start_report import start_report
+from .create_api_key import generate_api_key
 
 def testing_diagnosis():
     """Initialize Diagnosis testing"""
@@ -11,6 +12,8 @@ def testing_diagnosis():
     start_db()
 
     start_admin_role()
+
+    generate_api_key('SISTEM', '--')
 
     start_professional()
 

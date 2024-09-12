@@ -1,6 +1,6 @@
 import click
 from sqlalchemy import inspect
-from app.models import professional_model, role_model, client_model, report_models
+from app.models import professional_model, role_model, client_model, report_models, api_key_model
 from app.db.db import engine
 
 def check_table_exists(engine, table_name):
@@ -14,7 +14,8 @@ def start_db():
         "professionals": professional_model.Base,
         "roles": role_model.Base,
         "clients": client_model.Base,
-        "reports": report_models.Base
+        "reports": report_models.Base,
+        "api_keys": api_key_model.Base
     }
     
     for table_name, model_base in tables_to_check.items():

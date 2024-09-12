@@ -17,6 +17,7 @@ def start_admin_role():
                     role_name ="admin",
 
                     create_role=True,
+                    get_your_role=True,
                     edit_role=True,
                     delete_role=True,
                     get_all_roles=True,
@@ -27,14 +28,18 @@ def start_admin_role():
                     delete_all_professional=True,
 
                     create_report=True,
+                    get_your_report=True,
                     get_all_reports=True,
                     edit_all_reports=True,
                     delete_all_reports=True,
 
                     create_clients=True,
+                    get_your_client=True,
                     get_all_clients=True,
-                    edit_all_client=True,
+                    edit_all_clients=True,
                     delete_all_client=True,
+
+                    create_pdf=True
                 )
                 create_role(db, admin_role)
                 click.echo("Admin role created successfully!")
