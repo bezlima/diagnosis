@@ -5,26 +5,26 @@ class RoleBase(BaseModel):
 
     create_role : bool
     get_your_role : bool
+    get_all_roles : bool
     edit_role : bool
     delete_role : bool
-    get_all_roles : bool
 
-    create_professionals : bool
+    create_professional : bool
     get_all_professionals : bool
-    edit_all_professional : bool
-    delete_all_professional : bool
+    edit_professional : bool
+    delete_professional : bool
 
     create_report : bool
     get_your_report : bool
     get_all_reports : bool
-    edit_all_reports: bool
-    delete_all_reports: bool
+    edit_report: bool
+    delete_report: bool
 
-    create_clients : bool
+    create_client : bool
     get_your_client : bool
     get_all_clients : bool
-    edit_all_clients : bool
-    delete_all_client : bool
+    edit_client : bool
+    delete_client : bool
 
     create_pdf: bool
 

@@ -18,26 +18,26 @@ def start_admin_role():
 
                     create_role=True,
                     get_your_role=True,
+                    get_all_roles=True,
                     edit_role=True,
                     delete_role=True,
-                    get_all_roles=True,
 
-                    create_professionals=True,
+                    create_professional=True,
                     get_all_professionals=True,
-                    edit_all_professional=True,
-                    delete_all_professional=True,
+                    edit_professional=True,
+                    delete_professional=True,
 
                     create_report=True,
                     get_your_report=True,
                     get_all_reports=True,
-                    edit_all_reports=True,
-                    delete_all_reports=True,
+                    edit_report=True,
+                    delete_report=True,
 
-                    create_clients=True,
+                    create_client=True,
                     get_your_client=True,
                     get_all_clients=True,
-                    edit_all_clients=True,
-                    delete_all_client=True,
+                    edit_client=True,
+                    delete_client=True,
 
                     create_pdf=True
                 )
