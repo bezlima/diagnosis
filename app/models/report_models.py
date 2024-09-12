@@ -1,4 +1,4 @@
-from sqlalchemy import String, Column, Integer, ForeignKey
+from sqlalchemy import String, Column, Integer, ForeignKey, Text
 from ..db.db import Base
 
 class Report(Base):
@@ -8,4 +8,4 @@ class Report(Base):
     professional_id = Column(Integer, ForeignKey('professionals.professional_id'))
     client_id = Column(Integer, ForeignKey('clients.client_id'))
     title = Column(String)
-    content = Column(String)
+    content = Column(Text)

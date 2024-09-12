@@ -37,7 +37,7 @@ def delete_report(db: Session, report_id: int):
         return True
     return
 
-def create_report(db: Session, report: report_schema.ReportBase):
+def create_report(db: Session, report: report_models.Report):
     db.add(report)
     db.commit()
     db.refresh(report)
