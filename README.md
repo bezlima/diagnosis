@@ -9,14 +9,20 @@ pip install
     jinja2
     weasyprint
     pyjwt
-    pip install InquirerPy
-
+    InquirerPy
+    tabulate
 
 # criar role adm
 python cli.py init-admin-role
 
 # inicio personalizado
-python cli.py main-menu
+python cli.py main-menu - menu de inicio
+
+python cli.py start - inicio
+
+python cli.py get-apikeys - 
+
+python cli.py get-apikeys - 
 
 # proximos passos
 
@@ -26,16 +32,46 @@ python cli.py main-menu
 
 [x] criar pdf routes
 
-[] alterar pdf generator = alterar geração - criar template
-
 [x] criar rota de autenticação para professionals
 
-[] ------ conectar rotas aos serviços -------
+[x] cors policy
 
-[] adicionar JWT em rotas
+[x] conectar rotas aos serviços - professional, roles, clients, report
 
-[] criar api Key para o projeto > adcionar as rotas
+[x] adicionar JWT em rotas
+
+[x] criar api Key para o projeto > adcionar as rotas
+ 
+[x] criar cli para iniciar servidor
+
+[x] criar cli para iniciar uma api key
+
+[x] criar cli para criar um api key
+
+[x] criar função de inicialização para gerar role incial(todas a permissões) e usuário adm inicial
+
+[x] alterar pdf generator = alterar geração - criar template
+
+[] verificar dicionario em serviços, escolher se coloca model_dump() no serviço ou na rota
+
+[] criar regras de negocio nas rotas
+    [] client
+    [] login
+    [x] pdf
+    [] professional
+    [] report
+    [] role
+
+[] verificar resposta de rota
+    [x] client
+    [] login
+    [x] pdf
+    [] professional
+    [] report
+    [] role
+
+[] modificar o schema para teste em swagger
 
 [] criar requirements.txt > pip freze
 
-[] criar função de inicialização para gerar role incial(todas a permissões) e usuário adm inicial
+[] refatorar e organizar imports se necessário 
