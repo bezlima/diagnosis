@@ -10,22 +10,12 @@ def get_clients_by_professional_id(db: Session, professional_id: int, skip: int 
     clients = db.query(client_model.Client).filter(client_model.Client.professional_id == professional_id).offset(skip).limit(limit).all()
     return clients
 
-def get_clients_by_name(db: Session, client_name: str, professional_id: int, skip: int = 0, limit: int = 100):
+def get_clients_by_name(db: Session, client_name: str, skip: int = 0, limit: int = 100):
     clients = db.query(client_model.Client).filter(client_model.Client.name == client_name).offset(skip).limit(limit).all()
-
-    if professional_id:
-        clients_with_professional = db.query(client_model.Client).filter(client_model.Client.name == client_name, client_model.professional_id == professional_id).offset(skip).limit(limit).all()
-        return clients_with_professional
-    
     return clients
 
-def get_client_by_email(db: Session, client_email: str, professional_id: int):
+def get_client_by_email(db: Session, client_email: str):
     client = db.query(client_model.Client).filter(client_model.Client.email == client_email).first()
-
-    if professional_id:
-        client_with_professional = db.query(client_model.Client).filter(client_model.Client.email == client_email, client_model.professional_id == professional_id).first()
-        return client_with_professional
-    
     return client
 
 def get_client_by_id(db: Session, client_id: int):
