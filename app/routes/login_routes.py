@@ -12,7 +12,6 @@ login_router = APIRouter(tags=["Login"])
 
 @login_router.post("/login", response_model=LoginResponse)
 def login(login_request: LoginRequest, db: Session = Depends(get_db)):
-
     try:
         db_professional = professional_services.get_professional_by_email(db, email=login_request.email)
 
@@ -21,7 +20,12 @@ def login(login_request: LoginRequest, db: Session = Depends(get_db)):
         
         access_token_expires = timedelta(minutes=30)
 
-        access_token = create_access_token(data={"sub": db_professional.email, "professinal_id": db_professional.professional_id, "role": db_professional.role_id}, expires_delta=access_token_expires)
+        access_token = create_access_token(
+            data={"email": db_professional.email, 
+                  "professional_id": db_professional.professional_id, 
+                  "role": db_professional.role_id
+            }, 
+        expires_delta = access_token_expires)
         
         return {
             "access_token": access_token,
