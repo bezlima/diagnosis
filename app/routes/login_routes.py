@@ -10,7 +10,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 login_router = APIRouter(tags=["Login"])
 
-@login_router.post("/login", response_model=LoginResponse)
+@login_router.post("/login", response_model=LoginResponse, status_code=200) 
 def login(login_request: LoginRequest, db: Session = Depends(get_db)):
     try:
         db_professional = professional_services.get_professional_by_email(db, email=login_request.email)

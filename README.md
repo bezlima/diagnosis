@@ -56,7 +56,7 @@ python cli.py get-apikeys -
 
 [] criar regras de negocio nas rotas
     [x] client
-    [] login
+    [x] login
     [x] pdf
     [] professional
     [] report
@@ -64,13 +64,15 @@ python cli.py get-apikeys -
 
 [] verificar resposta de rota
     [x] client
-    [] login
+    [x] login
     [x] pdf
     [] professional
     [] report
     [] role
 
 [x] alterar role entitie
+
+[] adicionar response models
 
 [] modificar o schema para teste em swagger
 
