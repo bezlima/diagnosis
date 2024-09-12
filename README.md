@@ -58,7 +58,7 @@ python cli.py get-apikeys -
     [x] client
     [x] login
     [x] pdf
-    [] professional
+    [x] professional
     [] report
     [] role
 
@@ -66,7 +66,7 @@ python cli.py get-apikeys -
     [x] client
     [x] login
     [x] pdf
-    [] professional
+    [x] professional
     [] report
     [] role
 
