@@ -3,3 +3,5 @@ __pycache__
 sql_app.db
 .env
 private_data
+ToDo.md
+html.html
