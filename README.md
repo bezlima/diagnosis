@@ -106,3 +106,11 @@ http://localhost:8000/docs
 OU
 
 http://localhost:8000/redoc
+
+## Próximos passos
+
+[ ] Modificar o schemas para teste no swagger
+
+[ ] Adicionar refresh token
+
+[ ] Adicionar response models
