@@ -42,7 +42,7 @@ def start_client():
 
             finally:
                 db.close()
-
-        return click.echo("Professional id 1 does not exist.")
-    
-    return click.echo("Professional's or Client's table does not exist.")
+        else:
+            return click.echo("Professional id 1 does not exist.")
+    else:
+        return click.echo("Professional's or Client's table does not exist.")

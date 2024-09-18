@@ -47,4 +47,5 @@ def start_admin_role():
                 click.echo("Admin role already exists.")
         finally:
             db.close()
-    return click.echo("Role's table does not exist.")
+    else:
+        return click.echo("Role's table does not exist.")

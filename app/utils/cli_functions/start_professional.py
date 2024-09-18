@@ -43,7 +43,7 @@ def start_professional():
 
             finally:
                 db.close()
-
-        return click.echo("Role id 1 does not exist.")
-    
-    return click.echo("Professional's or Role's table does not exist.")
+        else:
+            return click.echo("Role id 1 does not exist.")
+    else:
+        return click.echo("Professional's or Role's table does not exist.")

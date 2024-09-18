@@ -13,12 +13,12 @@ def testing_diagnosis():
 
     start_admin_role()
 
-    generate_api_key('SISTEM', '--')
-
     start_professional()
 
     start_client()
 
     start_report()
+
+    generate_api_key('SISTEM', '--')
 
     start_server()

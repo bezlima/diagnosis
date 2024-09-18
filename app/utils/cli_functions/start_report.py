@@ -47,7 +47,7 @@ def start_report():
             finally:
                 db.close()
             
-
-        return click.echo("Professional_id 1 and client_id 1 does not exist.")
-    
-    return click.echo("Professional's, Client's or Report's table does not exist.")
+        else:
+            return click.echo("Professional_id 1 and client_id 1 does not exist.")
+    else:
+        return click.echo("Professional's, Client's or Report's table does not exist.")
