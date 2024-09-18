@@ -14,10 +14,12 @@ from .routes.report_route import report_router
 from fastapi.middleware.cors import CORSMiddleware
 from .utils.veirfy_api_key import verify_api_key
 
-# Inicio do aplicativo
 app = FastAPI(
-    title="Seu Projeto API",
-    description="Descrição detalhada da sua API",
+    title="Diagnosis",
+    description="""
+        Diagnosis é um sistema de gerenciamento voltado para a área de saúde, permitindo o cadastro e controle de profissionais e clientes. O sistema oferece ferramentas para que os profissionais escrevam diagnósticos sobre os clientes e gerem relatórios em PDF de maneira eficiente e organizada.
+        Focado no ambiente empresarial, o Diagnosis permite a criação de cargos personalizados para os profissionais, com permissões ajustáveis de acordo com suas responsabilidades. Dessa forma, é possível garantir que cada profissional tenha acesso apenas aos recursos necessários para realizar suas funções no sistema.
+    """,
     version="1.0.0",
     openapi_tags=[
         {"name": "Login", "description": "Login endpoint"},
@@ -38,14 +40,12 @@ app = FastAPI(
     dependencies=[Depends(verify_api_key)]
 )
 
-# inicio da base de dados
 professional_model.Base.metadata.create_all(bind=engine)
 role_model.Base.metadata.create_all(bind=engine)
 client_model.Base.metadata.create_all(bind=engine)
 report_models.Base.metadata.create_all(bind=engine)
 api_key_model.Base.metadata.create_all(bind=engine)
 
-# Inclusão de rotas ao projeto
 app.include_router(login_router)
 app.include_router(role_router, dependencies=[Depends(get_current_user)])
 app.include_router(professional_router, dependencies=[Depends(get_current_user)])
@@ -53,7 +53,6 @@ app.include_router(client_router, dependencies=[Depends(get_current_user)])
 app.include_router(report_router, dependencies=[Depends(get_current_user)])
 app.include_router(pdf_router, dependencies=[Depends(get_current_user)])
 
-# Configurações de CORS
 origins = [
     "http://localhost",
     "http://localhost:8080",
