@@ -22,6 +22,7 @@ def exit_cli():
 
 @cli.command()
 def start():
+    """Command to start server""" 
     start_server()
 
 @cli.command()
